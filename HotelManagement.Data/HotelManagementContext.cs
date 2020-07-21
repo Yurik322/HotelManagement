@@ -5,13 +5,19 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HotelManagement.Data
 {
-    public class HotelManagementContext : DbContext
+    public class HotelManagementContext : IdentityDbContext<HotelManagementUser>
     {
-        public HotelManagementContext() : base("HMSConnectionString")
+        public HotelManagementContext() : base("HotelManagementConnectionString")
         {
+        }
+
+        public static HotelManagementContext Create()
+        {
+            return new HotelManagementContext();
         }
 
         public DbSet<AccommodationType> AccommodationTypes { get; set; }
