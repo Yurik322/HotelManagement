@@ -1,0 +1,39 @@
+﻿@model HotelManagement.Areas.Dashboard.ViewModels.AccommodationTypesListingModel
+
+@if (Model != null && Model.AccommodationTypes != null && Model.AccommodationTypes.Count() > 0)
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        @foreach (var accommodationType in Model.AccommodationTypes)
+        {
+            <tr>
+                <td>
+                    @accommodationType.Name
+                </td>
+                <td>
+                    @accommodationType.Description
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary">Edit</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
