@@ -16,5 +16,13 @@ namespace HotelManagement.Services
 
             return context.AccommodationTypes.ToList();
         }
+        public bool SaveAccommodationType(AccommodationType accommodationType)
+        {
+            var context = new HotelManagementContext();
+
+            context.AccommodationTypes.Add(accommodationType);
+
+            return context.SaveChanges() > 0;
+        }
     }
 }
