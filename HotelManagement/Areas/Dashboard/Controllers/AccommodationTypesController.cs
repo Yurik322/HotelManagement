@@ -24,11 +24,6 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             return View(model);
         }
 
-        //public ActionResult Listing()
-        //{
-
-        //}
-
         [HttpGet]
         public ActionResult Action(int? ID)
         {
