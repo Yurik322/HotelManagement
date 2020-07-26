@@ -17,7 +17,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
         // GET: Dashboard/AccommodationTypes
         public ActionResult Index(string searchTerm, int? accommodationTypeID, int? page)
         {
-            int recordSize = 3;
+            int recordSize = 5;
             page = page ?? 1;
 
             AccommodationPackagesListingModel model = new AccommodationPackagesListingModel();
