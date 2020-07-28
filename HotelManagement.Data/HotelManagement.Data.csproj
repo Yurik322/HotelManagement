@@ -65,6 +65,10 @@
     <Compile Include="Migrations\202007211153190_identityframeworkreference.Designer.cs">
       <DependentUpon>202007211153190_identityframeworkreference.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007281516158_Initial2.cs" />
+    <Compile Include="Migrations\202007281516158_Initial2.Designer.cs">
+      <DependentUpon>202007281516158_Initial2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007211153190_identityframeworkreference.resx">
       <DependentUpon>202007211153190_identityframeworkreference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007281516158_Initial2.resx">
+      <DependentUpon>202007281516158_Initial2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

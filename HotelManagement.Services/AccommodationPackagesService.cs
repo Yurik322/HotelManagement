@@ -10,7 +10,7 @@ namespace HotelManagement.Services
 {
     public class AccommodationPackagesService
     {
-        public IEnumerable<AccommodationPackage> GetAllAccommodationTypes()
+        public IEnumerable<AccommodationPackage> GetAllAccommodationPackages()
         {
             var context = new HotelManagementContext();
 

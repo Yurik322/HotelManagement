@@ -10,7 +10,7 @@ namespace HotelManagement.Entities
     {
         public int ID { get; set; }
         public string AccommodationID { get; set; }
-        public Accommondation Accommondation { get; set; }
+        public Accommodation Accommodation { get; set; }
         public DateTime FromDate { get; set; }
         /// <summary>
         /// Number of stay nights.

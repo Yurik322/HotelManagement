@@ -26,7 +26,6 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             model.AccommodationTypeID = accommodationTypeID;
 
             model.AccommodationPackages = _accommodationPackagesService.SearchAccommodationPackages(searchTerm, accommodationTypeID, page.Value, recordSize);
-
             model.AccommodationTypes = _accommodationTypesService.GetAllAccommodationTypes();
 
             var totalRecords = _accommodationPackagesService.SearchAccommodationPackagesCount(searchTerm, accommodationTypeID);

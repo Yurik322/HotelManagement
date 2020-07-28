@@ -32,7 +32,7 @@ namespace HotelManagement.Data.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.Accommondations",
+                "dbo.Accommodations",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -52,24 +52,24 @@ namespace HotelManagement.Data.Migrations
                         AccommodationID = c.String(),
                         FromDate = c.DateTime(nullable: false),
                         Duration = c.Int(nullable: false),
-                        Accommondation_ID = c.Int(),
+                        Accommodation_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Accommondations", t => t.Accommondation_ID)
-                .Index(t => t.Accommondation_ID);
+                .ForeignKey("dbo.Accommodations", t => t.Accommodation_ID)
+                .Index(t => t.Accommodation_ID);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Bookings", "Accommondation_ID", "dbo.Accommondations");
-            DropForeignKey("dbo.Accommondations", "AccommodationPackageID", "dbo.AccommodationPackages");
+            DropForeignKey("dbo.Bookings", "Accommodation_ID", "dbo.Accommodations");
+            DropForeignKey("dbo.Accommodations", "AccommodationPackageID", "dbo.AccommodationPackages");
             DropForeignKey("dbo.AccommodationPackages", "AccommodationTypeID", "dbo.AccommodationTypes");
-            DropIndex("dbo.Bookings", new[] { "Accommondation_ID" });
-            DropIndex("dbo.Accommondations", new[] { "AccommodationPackageID" });
+            DropIndex("dbo.Bookings", new[] { "Accommodation_ID" });
+            DropIndex("dbo.Accommodations", new[] { "AccommodationPackageID" });
             DropIndex("dbo.AccommodationPackages", new[] { "AccommodationTypeID" });
             DropTable("dbo.Bookings");
-            DropTable("dbo.Accommondations");
+            DropTable("dbo.Accommodations");
             DropTable("dbo.AccommodationTypes");
             DropTable("dbo.AccommodationPackages");
         }

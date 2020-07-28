@@ -1,0 +1,91 @@
+﻿@model HotelManagement.Areas.Dashboard.ViewModels.AccommodationsListingModel
+
+@if (Model != null && Model.Accommodations != null && Model.Accommodations.Count() > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Accommodation Package</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var accommodation in Model.Accommodations)
+            {
+                <tr>
+                    <td>
+                        @accommodation.Name
+                    </td>
+                    <td>
+                        @accommodation.Description
+                    </td>
+                    <td>
+                        @if (accommodation.AccommodationPackage != null)
+                        {
+                            @accommodation.AccommodationPackage.Name
+                        }
+                    </td>
+                    <td>
+                        <button data-href="@Url.Action("Action", "Accommodations", new { ID = accommodation.ID })" type="button" class="data-btn btn btn-primary" data-toggle="modal" data-target="#actionModal"><i class="fas fa-edit mr-1"></i> Edit</button>
+                        <button data-href="@Url.Action("Delete", "Accommodations", new { ID = accommodation.ID })" type="button" class="data-btn btn btn-danger" data-toggle="modal" data-target="#actionModal"><i class="fas fa-trash-alt mr-1"></i> Delete</button>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <!-- pager -->
+    if (Model.Pager.EndPage > 1)
+    {
+        <nav>
+            <ul class="pagination">
+                @if (Model.Pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Accommodations")">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Accommodations", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm, accommodationPackageID = Model.AccommodationPackageID})">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                }
+
+                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "Accommodations", new { page = page, searchTerm = Model.SearchTerm, accommodationPackageID = Model.AccommodationPackageID})">
+                            @page
+                        </a>
+                    </li>
+                }
+
+                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Accommodations", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm, accommodationPackageID = Model.AccommodationPackageID})">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Accommodations", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm, accommodationPackageID = Model.AccommodationPackageID})">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
