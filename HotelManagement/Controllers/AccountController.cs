@@ -10,30 +10,31 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HotelManagement.Models;
+using HotelManagement.Services;
 
 namespace HotelManagement.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private HotelManagementSignInManager _signInManager;
+        private HotelManagementUserManager _userManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(HotelManagementUserManager userManager, HotelManagementSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
+        public HotelManagementSignInManager SignInManager
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return _signInManager ?? HttpContext.GetOwinContext().Get<HotelManagementSignInManager>();
             }
             private set 
             { 
@@ -41,11 +42,11 @@ namespace HotelManagement.Controllers
             }
         }
 
-        public ApplicationUserManager UserManager
+        public HotelManagementUserManager UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<HotelManagementUserManager>();
             }
             private set
             {

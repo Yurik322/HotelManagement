@@ -8,6 +8,7 @@ using Owin;
 using HotelManagement.Models;
 using HotelManagement.Data;
 using HotelManagement.Entities;
+using HotelManagement.Services;
 
 namespace HotelManagement
 {
@@ -18,8 +19,8 @@ namespace HotelManagement
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(HotelManagementContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-            app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+            app.CreatePerOwinContext<HotelManagementUserManager>(HotelManagementUserManager.Create);
+            app.CreatePerOwinContext<HotelManagementSignInManager>(HotelManagementSignInManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
@@ -32,7 +33,7 @@ namespace HotelManagement
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, HotelManagementUser>(
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<HotelManagementUserManager, HotelManagementUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
