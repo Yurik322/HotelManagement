@@ -26,9 +26,10 @@ namespace HotelManagement.Areas.Dashboard.ViewModels
         public string Country { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
-        //public string RoleID { get; set; }
-        //public IdentityRole Role { get; set; }
-
-        //public IEnumerable<IdentityRole> Roles { get; set; }
+    }
+    public class UserRolesModel
+    {
+        public IEnumerable<IdentityRole> UserRoles { get; set; }
+        public IEnumerable<IdentityRole> Roles { get; set; }
     }
 }

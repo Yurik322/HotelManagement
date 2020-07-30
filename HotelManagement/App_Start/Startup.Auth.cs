@@ -21,6 +21,7 @@ namespace HotelManagement
             app.CreatePerOwinContext(HotelManagementContext.Create);
             app.CreatePerOwinContext<HotelManagementUserManager>(HotelManagementUserManager.Create);
             app.CreatePerOwinContext<HotelManagementSignInManager>(HotelManagementSignInManager.Create);
+            app.CreatePerOwinContext<HotelManagementRolesManager>(HotelManagementRolesManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider

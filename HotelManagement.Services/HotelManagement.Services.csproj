@@ -82,6 +82,7 @@
     <Compile Include="AccommodationsService.cs" />
     <Compile Include="AccommodationTypesService.cs" />
     <Compile Include="ApplicationUserManager.cs" />
+    <Compile Include="HotelManagementRolesManager.cs" />
     <Compile Include="HotelManagementUserManager.cs" />
     <Compile Include="HotelManagementSignInManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

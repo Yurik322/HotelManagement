@@ -170,11 +170,13 @@
     <Compile Include="Areas\Dashboard\Controllers\AccommodationsController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\AccommodationTypesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\RolesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\UsersController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccommodationPackagesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccommodationsModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccommodationTypesModels.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\RolesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\UsersModels.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -246,6 +248,11 @@
     <Content Include="Areas\Dashboard\Views\Users\_Delete.cshtml" />
     <Content Include="Areas\Dashboard\Views\Users\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\_Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\_Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Users\_UserRoles.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -17,6 +17,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
     {
         private HotelManagementSignInManager _signInManager;
         private HotelManagementUserManager _userManager;
+        private HotelManagementRolesManager _roleManager;
         
         public HotelManagementSignInManager SignInManager
         {
@@ -40,15 +41,27 @@ namespace HotelManagement.Areas.Dashboard.Controllers
                 _userManager = value;
             }
         }
+        public HotelManagementRolesManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<HotelManagementRolesManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
 
         public UsersController()
         {
         }
 
-        public UsersController(HotelManagementUserManager userManager, HotelManagementSignInManager signInManager)
+        public UsersController(HotelManagementUserManager userManager, HotelManagementSignInManager signInManager, HotelManagementRolesManager roleManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
 
 
@@ -57,15 +70,14 @@ namespace HotelManagement.Areas.Dashboard.Controllers
         // GET: Dashboard/AccommodationTypes
         public ActionResult Index(string searchTerm, string roleID, int? page)
         {
-            int recordSize = 1;
+            int recordSize = 10;
             page = page ?? 1;
 
             UsersListingModel model = new UsersListingModel();
 
             model.SearchTerm = searchTerm;
             model.RoleID = roleID;
-            //model.Roles = _accommodationPackagesService.GetAllAccommodationPackages();
-
+            model.Roles = RoleManager.Roles.ToList();
 
             model.Users = SearchUsers(searchTerm, roleID, page.Value, recordSize);
 
@@ -212,6 +224,60 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             {
                 json.Data = new { Success = false, Message = "Invalid user." };
             }
+
+            return json;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> UserRoles(string ID)
+        {
+            UserRolesModel model = new UserRolesModel();
+            model.Roles = RoleManager.Roles.ToList();
+
+            var user = await UserManager.FindByIdAsync(ID);
+            var userRoleIDs = user.Roles.Select(x => x.RoleId).ToList();
+            model.UserRoles = RoleManager.Roles.Where(x => userRoleIDs.Contains(x.Id)).ToList();
+
+            return PartialView("_UserRoles", model);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> UserRoles(UserActionModel model)
+        {
+            JsonResult json = new JsonResult();
+
+            IdentityResult result = null;
+
+            // trying to edit a record
+            if (!string.IsNullOrEmpty(model.ID))
+            {
+                var user = await UserManager.FindByIdAsync(model.ID);
+
+                user.FullName = model.FullName;
+                user.Email = model.Email;
+                user.UserName = model.Username;
+                user.Country = model.Country;
+                user.City = model.City;
+                user.Address = model.Address;
+
+                result = await UserManager.UpdateAsync(user);
+            }
+            // trying to create a record
+            else
+            {
+                var user = new HotelManagementUser();
+
+                user.FullName = model.FullName;
+                user.Email = model.Email;
+                user.UserName = model.Username;
+                user.Country = model.Country;
+                user.City = model.City;
+                user.Address = model.Address;
+
+                result = await UserManager.CreateAsync(user);
+            }
+
+            json.Data = new { Success = result.Succeeded, Message = string.Join(", ", result.Errors) };
 
             return json;
         }

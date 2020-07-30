@@ -1,11 +1,11 @@
-﻿@model HotelManagement.Areas.Dashboard.ViewModels.UsersListingModel
+﻿@model HotelManagement.Areas.Dashboard.ViewModels.RolesListingModel
 @{
     ViewBag.Title = "Index";
 }
 
 <div class="row">
     <div class="col col-lg-12">
-        <h2>Users</h2>
+        <h2>Roles</h2>
         <hr />
     </div>
 </div>
@@ -16,25 +16,10 @@
             <div class="input-group">
                 <input type="text" name="searchterm" class="form-control" placeholder="Search" value="@Model.SearchTerm">
 
-                @if (Model.Roles != null && Model.Roles.Count() > 0)
-                {
-                    <select name="RoleID" class="form-control">
-                        <option value="0">
-                            Select Role
-                        </option>
-                        @foreach (var role in Model.Roles)
-                        {
-                            <option value="@role.Id" @(role.Id == Model.RoleID ? "selected" : string.Empty )>
-                                @role.Name
-                            </option>
-                        }
-                    </select>
-                }
-
                 <div class="input-group-append" id="button-addon4">
                     <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search mr-1"></i> Search</button>
-                    <a class="btn btn-outline-secondary" href="@Url.Action("Index", "Users")"><i class="fas fa-redo-alt mr-1"></i> Reset</a>
-                    <button data-href="@Url.Action("Action", "Users")" class="data-btn btn btn-outline-success" type="button" data-toggle="modal" data-target="#actionModal"><i class="fas fa-plus mr-1"></i> Create</button>
+                    <a class="btn btn-outline-secondary" href="@Url.Action("Index", "Roles")"><i class="fas fa-redo-alt mr-1"></i> Reset</a>
+                    <button data-href="@Url.Action("Action", "Roles")" class="data-btn btn btn-outline-success" type="button" data-toggle="modal" data-target="#actionModal"><i class="fas fa-plus mr-1"></i> Create</button>
                 </div>
 
             </div>
