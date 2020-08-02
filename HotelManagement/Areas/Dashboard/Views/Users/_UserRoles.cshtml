@@ -32,7 +32,7 @@
                                 @role.Name
                             </td>
                             <td>
-                                <button data-href="@Url.Action("DeleteUserRole", "Users", new {ID = role.Id})" type="button" class="data-btn btn btn-danger" data-toggle="modal" data-target="#actionModal"><i class="fas fa-trash-alt mr-1"></i> Delete</button>
+                                <button data-href="@Url.Action("DeleteUserRole", "Users", new {userID = Model.UserID, roleID = role.Id})" type="button" class="data-btn btn btn-danger" data-toggle="modal" data-target="#actionModal"><i class="fas fa-user-times mr-1"></i> Delete</button>
                             </td>
                         </tr>
                     }
@@ -65,23 +65,13 @@
                                 @role.Name
                             </td>
                             <td>
-                                <button data-href="@Url.Action("AssignUserRole", "Users", new {ID = role.Id})" type="button" class="data-btn btn btn-success" data-toggle="modal" data-target="#actionModal"><i class="fas fa-trash-alt mr-1"></i> Assign</button>
+                                <button data-href="@Url.Action("AssignUserRole", "Users", new {userID = Model.UserID, roleID = role.Id})" type="button" class="btnAssignRole btn btn-success"><i class="fas fa-user-check mr-1"></i> Assign</button>
                             </td>
                         </tr>
                     }
                     </tbody>
                 </table>
             }
-            else
-            {
-                <div class="alert alert-warning" role="alert">
-                    No roles available.
-                </div>
-            }
-
-            <div class="errorDiv">
-
-            </div>
         </div>
         <div class="modal-footer">
             <button id="actionButton" type="button" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Save</button>
@@ -91,20 +81,13 @@
 }
 
 <script>
-    $("#actionButton").click(function() {
+    $(".btnAssignRole").click(function () {
         $.ajax({
-            url: '@Url.Action("Action", "Users")',
-            type: "post",
-            data: $("#actionForm").serialize()
+            url: $(this).attr("data-href"),
+            type: "POST"
         }).done(function (response) {
             debugger;
-            if (response.Success) {
-
-                location.reload();
-
-            } else {
-                $(".errorDiv").html(response.Message);
-            }
+//            $("#actionModal .modal-dialog").html(response);
         });
     });
 </script>

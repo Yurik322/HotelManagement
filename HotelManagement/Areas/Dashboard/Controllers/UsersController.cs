@@ -232,52 +232,53 @@ namespace HotelManagement.Areas.Dashboard.Controllers
         public async Task<ActionResult> UserRoles(string ID)
         {
             UserRolesModel model = new UserRolesModel();
-            model.Roles = RoleManager.Roles.ToList();
 
+            model.UserID = ID;
             var user = await UserManager.FindByIdAsync(ID);
             var userRoleIDs = user.Roles.Select(x => x.RoleId).ToList();
+            
             model.UserRoles = RoleManager.Roles.Where(x => userRoleIDs.Contains(x.Id)).ToList();
+
+            model.Roles = RoleManager.Roles.Where(x => !userRoleIDs.Contains(x.Id)).ToList();
 
             return PartialView("_UserRoles", model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="opperation">Type of operation to perform e.g. Assing role or Delete role</param>
+        /// <param name="userID"></param>
+        /// <param name="roleID"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<JsonResult> UserRoles(UserActionModel model)
+        public async Task<JsonResult> UserRoleOperation(string opperation, string userID, string roleID)
         {
             JsonResult json = new JsonResult();
 
-            IdentityResult result = null;
+            var user = await UserManager.FindByIdAsync(userID);
+            var role = await RoleManager.FindByIdAsync(roleID);
 
-            // trying to edit a record
-            if (!string.IsNullOrEmpty(model.ID))
+            if (user != null && role != null)
             {
-                var user = await UserManager.FindByIdAsync(model.ID);
+                IdentityResult result = null;
 
-                user.FullName = model.FullName;
-                user.Email = model.Email;
-                user.UserName = model.Username;
-                user.Country = model.Country;
-                user.City = model.City;
-                user.Address = model.Address;
+                if (opperation.Equals("assign"))
+                {
+                    result = await UserManager.AddToRoleAsync(userID, role.Name);
+                }
+                else if (opperation.Equals("delete"))
+                {
+                    result = await UserManager.RemoveFromRoleAsync(userID, role.Name);
+                }
 
-                result = await UserManager.UpdateAsync(user);
+
+                json.Data = new {Success = result.Succeeded, Message = string.Join(",", result.Errors)};
             }
-            // trying to create a record
             else
             {
-                var user = new HotelManagementUser();
-
-                user.FullName = model.FullName;
-                user.Email = model.Email;
-                user.UserName = model.Username;
-                user.Country = model.Country;
-                user.City = model.City;
-                user.Address = model.Address;
-
-                result = await UserManager.CreateAsync(user);
+                json.Data = new { Success = false, Message = "Invalid operation." };
             }
-
-            json.Data = new { Success = result.Succeeded, Message = string.Join(", ", result.Errors) };
 
             return json;
         }
