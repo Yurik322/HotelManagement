@@ -68,7 +68,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
         readonly AccommodationsService _accommodationsService = new AccommodationsService();
         readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
         // GET: Dashboard/AccommodationTypes
-        public ActionResult Index(string searchTerm, string roleID, int? page)
+        public async Task<ActionResult> Index(string searchTerm, string roleID, int? page)
         {
             int recordSize = 10;
             page = page ?? 1;
@@ -79,18 +79,17 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             model.RoleID = roleID;
             model.Roles = RoleManager.Roles.ToList();
 
-            model.Users = SearchUsers(searchTerm, roleID, page.Value, recordSize);
+            model.Users = await SearchUsers(searchTerm, roleID, page.Value, recordSize);
 
-            var totalRecords = SearchUsersCount(searchTerm, roleID);
+            var totalRecords = await SearchUsersCount(searchTerm, roleID);
 
             model.Pager = new Pager(totalRecords, page, recordSize);
 
             return View(model);
         }
 
-        public IEnumerable<HotelManagementUser> SearchUsers(string searchTerm, string roleID, int page, int recordSize)
+        public async Task<IEnumerable<HotelManagementUser>> SearchUsers(string searchTerm, string roleID, int page, int recordSize)
         {
-            
             var users = UserManager.Users.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchTerm))
@@ -100,7 +99,11 @@ namespace HotelManagement.Areas.Dashboard.Controllers
 
             if (!string.IsNullOrEmpty(roleID))
             {
-                //users = users.Where(a => a.Email.ToLower().Contains(searchTerm.ToLower()));
+                var role = await RoleManager.FindByIdAsync(roleID);
+
+                var userIDs = role.Users.Select(x=>x.UserId).ToList();
+
+                users = users.Where(x => userIDs.Contains(x.Id));
             }
 
             // my pagination:
@@ -111,7 +114,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
 
             return users.OrderBy(x => x.Email).Skip(skip).Take(recordSize).ToList();
         }
-        public int SearchUsersCount(string searchTerm, string roleID)
+        public async Task<int> SearchUsersCount(string searchTerm, string roleID)
         {
             
             var users = UserManager.Users.AsQueryable();
@@ -123,7 +126,11 @@ namespace HotelManagement.Areas.Dashboard.Controllers
 
             if (!string.IsNullOrEmpty(roleID))
             {
-                //users = users.Where(a => a.Email.ToLower().Contains(searchTerm.ToLower()));
+                var role = await RoleManager.FindByIdAsync(roleID);
+
+                var userIDs = role.Users.Select(x => x.UserId).ToList();
+
+                users = users.Where(x => userIDs.Contains(x.Id));
             }
 
             return users.Count();
@@ -252,7 +259,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
         /// <param name="roleID"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<JsonResult> UserRoleOperation(string opperation, string userID, string roleID)
+        public async Task<JsonResult> UserRoleOperation(string userID, string roleID, bool isDelete = false)
         {
             JsonResult json = new JsonResult();
 
@@ -263,11 +270,11 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             {
                 IdentityResult result = null;
 
-                if (opperation.Equals("assign"))
+                if (!isDelete)
                 {
                     result = await UserManager.AddToRoleAsync(userID, role.Name);
                 }
-                else if (opperation.Equals("delete"))
+                else
                 {
                     result = await UserManager.RemoveFromRoleAsync(userID, role.Name);
                 }
