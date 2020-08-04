@@ -178,6 +178,7 @@
     <Compile Include="Areas\Dashboard\ViewModels\AccommodationTypesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\RolesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\UsersModels.cs" />
+    <Compile Include="Code\Variables.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
