@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HotelManagement.Services;
+using HotelManagement.ViewModels;
 
 namespace HotelManagement.Controllers
 {
@@ -10,21 +12,13 @@ namespace HotelManagement.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
+            HomeViewModels model = new HomeViewModels();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            AccommodationTypesService service = new AccommodationTypesService();
 
-            return View();
-        }
+            model.AccommodationTypes = service.GetAllAccommodationTypes();
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(model);
         }
     }
 }

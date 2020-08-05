@@ -14,6 +14,13 @@ namespace HotelManagement
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "FEAccommodation",
+                url: "{controller}/{action}/{id}",
+                defaults: new { area ="", controller = "Accommodation", action = "Index", id = UrlParameter.Optional },
+                namespaces: new [] { "HotelManagement.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

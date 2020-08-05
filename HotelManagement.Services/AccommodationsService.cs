@@ -17,6 +17,13 @@ namespace HotelManagement.Services
             return context.Accommodations.ToList();
         }
 
+        public IEnumerable<Accommodation> GetAllAccommodationsByAccommodationPackage(int accommodationPackageID)
+        {
+            var context = new HotelManagementContext();
+
+            return context.Accommodations.Where(x=>x.AccommodationPackageID == accommodationPackageID).ToList();
+        }
+
         public IEnumerable<Accommodation> SearchAccommodations(string searchTerm, int? accommodationPackageID, int page, int recordSize)
         {
             var context = new HotelManagementContext();

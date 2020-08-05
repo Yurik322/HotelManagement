@@ -179,6 +179,7 @@
     <Compile Include="Areas\Dashboard\ViewModels\RolesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\UsersModels.cs" />
     <Compile Include="Code\Variables.cs" />
+    <Compile Include="Controllers\AccommodationsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -189,6 +190,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccommodationsViewModels.cs" />
+    <Compile Include="ViewModels\HomeViewModels.cs" />
     <Compile Include="ViewModels\PageViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -317,8 +320,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -443,6 +444,7 @@
     <Content Include="fonts\icomoon\icomoon.ttf" />
     <Content Include="fonts\icomoon\icomoon.woff" />
     <None Include="packages.config" />
+    <Content Include="Views\Accommodations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HotelManagement.Data\HotelManagement.Data.csproj">
