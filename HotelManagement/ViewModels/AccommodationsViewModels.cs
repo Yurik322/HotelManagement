@@ -6,7 +6,7 @@ using HotelManagement.Entities;
 
 namespace HotelManagement.ViewModels
 {
-    public class AccommodationsViewModels
+    public class AccommodationsViewModel
     {
         public int SelectedAccommodationPackageID { get; set; }
         public AccommodationType AccommodationTypes { get; set; }

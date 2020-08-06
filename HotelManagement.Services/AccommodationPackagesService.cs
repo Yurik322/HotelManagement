@@ -21,7 +21,7 @@ namespace HotelManagement.Services
         {
             var context = new HotelManagementContext();
 
-            return context.AccommodationPackages.Where(x=>x.AccommodationTypeID == accommodationTypeID).ToList();
+            return context.AccommodationPackages.Where(x => x.AccommodationTypeID == accommodationTypeID).ToList();
         }
 
         public IEnumerable<AccommodationPackage> SearchAccommodationPackages(string searchTerm, int? accommodationTypeID, int page, int recordSize)
@@ -46,7 +46,7 @@ namespace HotelManagement.Services
             // skip = (2-1) = 1*3=3
             // skip = (3-1) = 2*3=6
 
-            return accommodationPackages.OrderBy(x=>x.AccommodationTypeID).Skip(skip).Take(recordSize).ToList();
+            return accommodationPackages.OrderBy(x => x.AccommodationTypeID).Skip(skip).Take(recordSize).ToList();
         }
 
         public int SearchAccommodationPackagesCount(string searchTerm, int? accommodationTypeID)

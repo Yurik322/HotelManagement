@@ -10,20 +10,20 @@ namespace HotelManagement.Controllers
 {
     public class AccommodationsController : Controller
     {
-        AccommodationTypesService accommodationTypesService = new AccommodationTypesService();
-        AccommodationPackagesService accommodationPackagesService = new AccommodationPackagesService();
-        AccommodationsService accommodationsService = new AccommodationsService();
+        readonly AccommodationTypesService _accommodationTypesService = new AccommodationTypesService();
+        readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
+        readonly AccommodationsService _accommodationsService = new AccommodationsService();
 
         public ActionResult Index(int accommodationTypeID, int? accommodationPackageID)
         {
-            AccommodationsViewModels model = new AccommodationsViewModels();
+            AccommodationsViewModel model = new AccommodationsViewModel();
 
-            model.AccommodationTypes = accommodationTypesService.GetAccommodationTypeById(accommodationTypeID);
-            model.AccommodationPackages = accommodationPackagesService.GetAllAccommodationPackagesByAccommodationType(accommodationTypeID);
+            model.AccommodationTypes = _accommodationTypesService.GetAccommodationTypeById(accommodationTypeID);
+            model.AccommodationPackages = _accommodationPackagesService.GetAllAccommodationPackagesByAccommodationType(accommodationTypeID);
             
             model.SelectedAccommodationPackageID = accommodationPackageID.HasValue ? accommodationPackageID.Value : model.AccommodationPackages.First().ID;
             
-            model.Accommodations = accommodationsService.GetAllAccommodationsByAccommodationPackage(model.SelectedAccommodationPackageID);
+            model.Accommodations = _accommodationsService.GetAllAccommodationsByAccommodationPackage(model.SelectedAccommodationPackageID);
 
             return View(model);
         }
