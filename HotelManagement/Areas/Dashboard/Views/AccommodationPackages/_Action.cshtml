@@ -56,6 +56,8 @@
                     <label>Pictures</label>
                     <input id="selectPictures" class="form-control" name="Pictures" type="file" multiple>
                 </div>
+                <div id="picturesArea">
+                </div>
             </form>
 
             <div class="errorDiv">
@@ -68,6 +70,10 @@
         </div>
     </div>
 }
+
+<div id="imageTemplate">
+    <img src="" class="img-fluid" style="width: 200px"/>
+</div>
 
 <script>
     $("#actionButton").click(function() {
@@ -105,6 +111,16 @@
         }).done(function (response) {
             debugger;
 
+            for (var i = 0; i < response.length; i++) {
+                var picture = response[i];
+
+                var $imgHtml = $("#imageTemplate").clone();
+
+                $imgHtml.find("img").attr("src", "/images/site/" + picture.Url);
+
+                $("#picturesArea").append($imgHtml.html());
+                debugger;
+            }
         });
     });
 </script>
