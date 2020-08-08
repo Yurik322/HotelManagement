@@ -55,8 +55,16 @@
                 <div class="form-group">
                     <label>Pictures</label>
                     <input id="selectPictures" class="form-control" name="Pictures" type="file" multiple>
+                    <input type="hidden" name="pictureIDs" id="pictureIDs" value=""/>
                 </div>
                 <div id="picturesArea">
+                    @if (Model.AccommodationPackagePictures != null && Model.AccommodationPackagePictures.Count() > 0)
+                    {
+                        foreach (var accommodationPicture in Model.AccommodationPackagePictures)
+                        {
+                            <img src="/images/site/@accommodationPicture.Picture.Url" class="img-fluid" style="width: 200px" onclick="removeMe(this)" data-id="@accommodationPicture.PictureID"/>
+                        }
+                    }
                 </div>
             </form>
 
@@ -72,11 +80,20 @@
 }
 
 <div id="imageTemplate">
-    <img src="" class="img-fluid" style="width: 200px"/>
+    <img src="" class="img-fluid" style="width: 200px" onclick="removeMe(this)"/>
 </div>
 
 <script>
-    $("#actionButton").click(function() {
+    $("#actionButton").click(function () {
+
+        var pictureIDs = [];
+        $("#picturesArea img").each(function() {
+            var picID = $(this).attr("data-id");
+
+            pictureIDs.push(picID);
+        });
+        $("#pictureIDs").val(pictureIDs.join());
+
         $.ajax({
             url: '@Url.Action("Action", "AccommodationPackages")',
             type: "post",
@@ -109,20 +126,23 @@
             processData: false,
             contentType: false
         }).done(function (response) {
-            debugger;
-
+            
             for (var i = 0; i < response.length; i++) {
                 var picture = response[i];
 
                 var $imgHtml = $("#imageTemplate").clone();
 
                 $imgHtml.find("img").attr("src", "/images/site/" + picture.Url);
+                $imgHtml.find("img").attr("data-id", picture.ID);
 
                 $("#picturesArea").append($imgHtml.html());
-                debugger;
             }
         });
     });
+
+    function removeMe(element) {
+        element.remove();
+    }
 </script>
 
 

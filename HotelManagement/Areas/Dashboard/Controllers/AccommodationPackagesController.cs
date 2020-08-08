@@ -14,7 +14,8 @@ namespace HotelManagement.Areas.Dashboard.Controllers
     {
         readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
         readonly AccommodationTypesService _accommodationTypesService = new AccommodationTypesService();
-        // GET: Dashboard/AccommodationTypes
+        readonly DashboardService _dashboardService = new DashboardService();
+
         public ActionResult Index(string searchTerm, int? accommodationTypeID, int? page)
         {
             int recordSize = 5;
@@ -50,6 +51,8 @@ namespace HotelManagement.Areas.Dashboard.Controllers
                 model.Name = accommodationPackage.Name;
                 model.NoOfRoom = accommodationPackage.NoOfRoom;
                 model.FeePerNight = accommodationPackage.FeePerNight;
+
+                model.AccommodationPackagePictures = _accommodationPackagesService.GetPicturesByAccommodationPackageID(accommodationPackage.ID);
             }
 
             model.AccommodationTypes = _accommodationTypesService.GetAllAccommodationTypes();
@@ -85,6 +88,14 @@ namespace HotelManagement.Areas.Dashboard.Controllers
                 accommodationPackage.Name = model.Name;
                 accommodationPackage.NoOfRoom = model.NoOfRoom;
                 accommodationPackage.FeePerNight = model.FeePerNight;
+
+                //model.PictureIDs = "90,32,22" = ["90", "32", "22"] = {90, 32, 22}
+                List<int> pictureIDs = model.PictureIDs.Split(',').Select(x => int.Parse(x)).ToList();
+
+                var pictures = _dashboardService.GetPicturesByIDs(pictureIDs);
+
+                accommodationPackage.AccommodationPackagePictures = new List<AccommodationPackagePicture>();
+                accommodationPackage.AccommodationPackagePictures.AddRange(pictures.Select(x=>new AccommodationPackagePicture() { PictureID = x.ID }));
 
                 result = _accommodationPackagesService.SaveAccommodationPackage(accommodationPackage);
             }

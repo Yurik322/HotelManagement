@@ -102,5 +102,12 @@ namespace HotelManagement.Services
 
             return context.SaveChanges() > 0;
         }
+
+        public List<AccommodationPackagePicture> GetPicturesByAccommodationPackageID(int accommodationPackageID)
+        {
+            var context = new HotelManagementContext();
+
+            return context.AccommodationPackages.Find(accommodationPackageID).AccommodationPackagePictures.ToList();
+        }
     }
 }

@@ -18,5 +18,12 @@ namespace HotelManagement.Services
 
             return context.SaveChanges() > 0;
         }
+
+        public IEnumerable<Picture> GetPicturesByIDs(List<int> pictureIDs)
+        {
+            var context = new HotelManagementContext();
+
+            return pictureIDs.Select(x => context.Pictures.Find(x)).ToList();
+        }
     }
 }
