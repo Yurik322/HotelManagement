@@ -22,7 +22,9 @@ namespace HotelManagement.Data
 
         public DbSet<AccommodationType> AccommodationTypes { get; set; }
         public DbSet<AccommodationPackage> AccommodationPackages { get; set; }
+        public DbSet<AccommodationPackagePicture> AccommodationPackagePictures { get; set; }
         public DbSet<Accommodation> Accommodations { get; set; }
+        public DbSet<AccommodationPicture> AccommodationPictures { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Picture> Pictures { get; set; }
     }

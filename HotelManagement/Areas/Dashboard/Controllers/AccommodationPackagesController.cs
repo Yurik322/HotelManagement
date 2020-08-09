@@ -67,6 +67,11 @@ namespace HotelManagement.Areas.Dashboard.Controllers
 
             var result = false;
 
+            //model.PictureIDs = "90,32,22" = ["90", "32", "22"] = {90, 32, 22}
+            List<int> pictureIDs = !string.IsNullOrEmpty(model.PictureIDs) ? model.PictureIDs.Split(',').Select(x => int.Parse(x)).ToList() : new List<int>();
+            var pictures = _dashboardService.GetPicturesByIDs(pictureIDs);
+
+
             // trying to edit a record
             if (model.ID > 0)
             {
@@ -76,6 +81,9 @@ namespace HotelManagement.Areas.Dashboard.Controllers
                 accommodationPackage.Name = model.Name;
                 accommodationPackage.NoOfRoom = model.NoOfRoom;
                 accommodationPackage.FeePerNight = model.FeePerNight;
+
+                accommodationPackage.AccommodationPackagePictures.Clear();
+                accommodationPackage.AccommodationPackagePictures.AddRange(pictures.Select(x => new AccommodationPackagePicture() { AccommodationPackageID = accommodationPackage.ID, PictureID = x.ID }));
 
                 result = _accommodationPackagesService.UpdateAccommodationPackage(accommodationPackage);
             }
@@ -88,11 +96,6 @@ namespace HotelManagement.Areas.Dashboard.Controllers
                 accommodationPackage.Name = model.Name;
                 accommodationPackage.NoOfRoom = model.NoOfRoom;
                 accommodationPackage.FeePerNight = model.FeePerNight;
-
-                //model.PictureIDs = "90,32,22" = ["90", "32", "22"] = {90, 32, 22}
-                List<int> pictureIDs = model.PictureIDs.Split(',').Select(x => int.Parse(x)).ToList();
-
-                var pictures = _dashboardService.GetPicturesByIDs(pictureIDs);
 
                 accommodationPackage.AccommodationPackagePictures = new List<AccommodationPackagePicture>();
                 accommodationPackage.AccommodationPackagePictures.AddRange(pictures.Select(x=>new AccommodationPackagePicture() { PictureID = x.ID }));

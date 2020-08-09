@@ -15,8 +15,10 @@ namespace HotelManagement.Controllers
             HomeViewModels model = new HomeViewModels();
 
             AccommodationTypesService service = new AccommodationTypesService();
+            AccommodationPackagesService accommodationPackagesService = new AccommodationPackagesService();
 
             model.AccommodationTypes = service.GetAllAccommodationTypes();
+            model.AccommodationPackages = accommodationPackagesService.GetAllAccommodationPackages();
 
             return View(model);
         }

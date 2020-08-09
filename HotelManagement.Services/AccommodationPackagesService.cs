@@ -70,10 +70,9 @@ namespace HotelManagement.Services
 
         public AccommodationPackage GetAccommodationPackageById(int ID)
         {
-            using (var context = new HotelManagementContext())
-            {
-                return context.AccommodationPackages.Find(ID);
-            }
+            var context = new HotelManagementContext();
+
+            return context.AccommodationPackages.Find(ID);
         }
 
         public bool SaveAccommodationPackage(AccommodationPackage accommodationPackage)
@@ -89,7 +88,13 @@ namespace HotelManagement.Services
         {
             var context = new HotelManagementContext();
 
-            context.Entry(accommodationPackage).State = System.Data.Entity.EntityState.Modified;
+            var existingAccommodationPackage = context.AccommodationPackages.Find(accommodationPackage.ID);
+
+            context.AccommodationPackagePictures.RemoveRange(existingAccommodationPackage.AccommodationPackagePictures);
+
+            context.Entry(existingAccommodationPackage).CurrentValues.SetValues(accommodationPackage);
+
+            context.AccommodationPackagePictures.AddRange(accommodationPackage.AccommodationPackagePictures);
 
             return context.SaveChanges() > 0;
         }

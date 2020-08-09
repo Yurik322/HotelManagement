@@ -108,7 +108,7 @@
                                 <li><a href="dining-bar.html">Dining &amp; Bar</a></li>
                                 <li><a href="aminities.html">Aminities</a></li>
                                 <li><a href="contact.html">Contact</a></li>
-                                
+
                                 @if (!User.Identity.IsAuthenticated)
                                 {
                                     <li><a href="@Url.Action("Register","Account")">Register</a></li>
@@ -236,6 +236,7 @@
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <!-- Main -->
     <script src="~/Scripts/main.js"></script>
-
+    <!-- Site -->
+    <script src="~/Scripts/site.js"></script>
 </body>
 </html>
