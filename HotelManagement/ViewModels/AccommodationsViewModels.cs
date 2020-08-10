@@ -17,4 +17,14 @@ namespace HotelManagement.ViewModels
     {
         public AccommodationPackage AccommodationPackage { get; set; }
     }
+    public class CheckAccommodationAvailabilityViewModel
+    {
+        public DateTime FromDate { get; set; }
+        public int Duration { get; set; }
+        public int NoOfAdults { get; set; }
+        public int NoOfChildren { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Notes { get; set; }
+    }
 }

@@ -28,6 +28,13 @@ namespace HotelManagement
             );
 
             routes.MapRoute(
+                name: "CheckAvailability",
+                url: "accommodation-check-availability",
+                defaults: new { area = "", controller = "Accommodations", action = "CheckAvailability" },
+                namespaces: new[] { "HotelManagement.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

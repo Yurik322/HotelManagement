@@ -36,5 +36,10 @@ namespace HotelManagement.Controllers
 
             return View(model);
         }
+        
+        public ActionResult CheckAvailability(CheckAccommodationAvailabilityViewModel model)
+        {
+            return View();
+        }
     }
 }
