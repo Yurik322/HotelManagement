@@ -1,0 +1,69 @@
+﻿@using HotelManagement.Entities
+@model HotelManagement.ViewModels.AccommodationPackageDetailsViewModel
+
+@if (Model != null && Model.AccommodationPackage != null)
+{
+    var thumbnailPicture = Model.AccommodationPackage.AccommodationPackagePictures != null && Model.AccommodationPackage.AccommodationPackagePictures.Count() > 0 ? Model.AccommodationPackage.AccommodationPackagePictures.First() : new AccommodationPackagePicture();
+
+    var thumbnailUrl = thumbnailPicture.Picture != null ? thumbnailPicture.Picture.Url : "default-image.jpg";
+
+
+    <aside id="colorlib-hero">
+        <div class="flexslider">
+            <ul class="slides">
+                <li style="background-image: url(/images/site/@thumbnailUrl);">
+                    <div class="overlay"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
+                                <div class="slider-text-inner slider-text-inner2 text-center">
+                                    <h2>
+                                        @Model.AccommodationPackage.AccommodationType.Name
+                                    </h2>
+                                    <h1>
+                                        @Model.AccommodationPackage.Name
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <div id="colorlib-amenities">
+        <div class="container">
+            <div class="row">
+                <div class="amenities-flex">
+                    <div class="desc animate-box">
+                        <p class="price">
+                            <span class="currency">
+                                $
+                            </span>
+                            <span class="price-room">
+                                @Model.AccommodationPackage.FeePerNight
+                            </span>
+                            <span class="per">/ per night</span>
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi voluptates eius, nam laudantium, quasi laborum cumque asperiores totam est perferendis itaque id esse quidem recusandae sequi aut? Ratione, enim, consequatur!
+                        </p>
+                    </div>
+                </div>
+                
+                @if (Model.AccommodationPackage.AccommodationPackagePictures != null && Model.AccommodationPackage.AccommodationPackagePictures.Count() > 0)
+                {
+                    foreach (var accommodationPackagePicture in Model.AccommodationPackage.AccommodationPackagePictures)
+                    {
+                        var imageUrl = accommodationPackagePicture.Picture != null ? accommodationPackagePicture.Picture.Url : "default-image.jpg";
+
+                        <div class="amenities-img animate-box fadeInUp animated-fast" style="height: 400px; background-image: url(/images/site/@imageUrl);">
+
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+}

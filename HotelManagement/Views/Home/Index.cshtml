@@ -1,4 +1,5 @@
-﻿@model HotelManagement.ViewModels.HomeViewModels
+﻿@using HotelManagement.Entities
+@model HotelManagement.ViewModels.HomeViewModels
 
 <aside id="colorlib-hero">
     <div class="flexslider">
@@ -198,11 +199,15 @@
 
                             @foreach (var accommodationPackage in Model.AccommodationPackages.Where(x=>x.AccommodationTypeID == accommodationType.ID))
                             {
+                                var thumbnailPicture = accommodationPackage.AccommodationPackagePictures != null && accommodationPackage.AccommodationPackagePictures.Count() > 0 ? accommodationPackage.AccommodationPackagePictures.First() : new AccommodationPackagePicture();
+
+                                var thumbnailUrl = thumbnailPicture.Picture != null ? thumbnailPicture.Picture.Url : "default-image.jpg";
+                                 
                                 <div class="item">
-                                    <a href="/images/room-1.jpg" class="room image-popup-link" style="background-image: url(/images/room-1.jpg);"></a>
+                                    <a href="@Url.Action("Details","Accommodations", new { area = "" , accommodationPackageID = accommodationPackage.ID})" class="room" style="background-image: url(/images/site/@thumbnailUrl);"></a>
                                     <div class="desc text-center">
                                         <h3>
-                                            <a href="@Url.Action("Index","Accommodations", new { area = "" , accommodationTypeID = accommodationType.ID})">
+                                            <a href="@Url.Action("Details","Accommodations", new { area = "" , accommodationPackageID = accommodationPackage.ID})">
                                                 @accommodationPackage.Name
                                             </a>
                                         </h3>

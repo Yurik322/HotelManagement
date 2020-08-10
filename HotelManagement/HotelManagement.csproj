@@ -447,6 +447,7 @@
     <Content Include="fonts\icomoon\icomoon.woff" />
     <None Include="packages.config" />
     <Content Include="Views\Accommodations\Index.cshtml" />
+    <Content Include="Views\Accommodations\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HotelManagement.Data\HotelManagement.Data.csproj">

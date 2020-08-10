@@ -8,9 +8,13 @@ namespace HotelManagement.ViewModels
 {
     public class AccommodationsViewModel
     {
-        public int SelectedAccommodationPackageID { get; set; }
         public AccommodationType AccommodationTypes { get; set; }
         public IEnumerable<AccommodationPackage> AccommodationPackages { get; set; }
         public IEnumerable<Accommodation> Accommodations { get; set; }
+        public int SelectedAccommodationPackageID { get; set; }
+    }
+    public class AccommodationPackageDetailsViewModel
+    {
+        public AccommodationPackage AccommodationPackage { get; set; }
     }
 }
