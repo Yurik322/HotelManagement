@@ -27,7 +27,7 @@
                 <input type="hidden" name="ID" value="@Model.ID" />
                 <div class="form-group">
                     <label>Accommodation Type</label>
-                    
+
                     <select class="form-control" name="AccommodationTypeID">
                         @if (Model.AccommodationTypes != null)
                         {
@@ -39,7 +39,7 @@
                             }
                         }
                     </select>
-                </div> 
+                </div>
                 <div class="form-group">
                     <label>Name</label>
                     <input class="form-control" name="Name" placeholder="Enter Name" value="@Model.Name">
@@ -51,18 +51,18 @@
                 <div class="form-group">
                     <label>FeePerNight</label>
                     <input class="form-control" name="FeePerNight" placeholder="Enter fee per night" value="@Model.FeePerNight">
-                </div>           
+                </div>
                 <div class="form-group">
                     <label>Pictures</label>
                     <input id="selectPictures" class="form-control" name="Pictures" type="file" multiple>
-                    <input type="hidden" name="pictureIDs" id="pictureIDs" value=""/>
+                    <input type="hidden" name="pictureIDs" id="pictureIDs" value="" />
                 </div>
                 <div id="picturesArea">
                     @if (Model.AccommodationPackagePictures != null && Model.AccommodationPackagePictures.Count() > 0)
                     {
                         foreach (var accommodationPicture in Model.AccommodationPackagePictures)
                         {
-                            <img src="/images/site/@accommodationPicture.Picture.Url" class="img-fluid" style="width: 200px" onclick="removeMe(this)" data-id="@accommodationPicture.PictureID"/>
+                            <img src="/images/site/@accommodationPicture.Picture.Url" class="img-fluid" style="width: 200px" onclick="removeMe(this)" data-id="@accommodationPicture.PictureID" />
                         }
                     }
                 </div>
@@ -80,7 +80,7 @@
 }
 
 <div id="imageTemplate">
-    <img src="" class="img-fluid" style="width: 200px" onclick="removeMe(this)"/>
+    <img src="" class="img-fluid" style="width: 200px" onclick="removeMe(this)" />
 </div>
 
 <script>
@@ -126,7 +126,7 @@
             processData: false,
             contentType: false
         }).done(function (response) {
-            
+
             for (var i = 0; i < response.length; i++) {
                 var picture = response[i];
 
@@ -144,5 +144,3 @@
         element.remove();
     }
 </script>
-
-

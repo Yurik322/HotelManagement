@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="PageViewModels.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,8 +20,8 @@ namespace HotelManagement.ViewModels
                 pageSize = 10;
             }
 
-            var totalPages = (int) Math.Ceiling((decimal) totalItems / (decimal) pageSize);
-            var currentPage = page != null ? (int) page : 1;
+            var totalPages = (int)Math.Ceiling((decimal)totalItems / (decimal)pageSize);
+            var currentPage = page != null ? (int)page : 1;
             var startPage = currentPage - 5;
             var endPage = currentPage + 4;
             if (startPage <= 0)

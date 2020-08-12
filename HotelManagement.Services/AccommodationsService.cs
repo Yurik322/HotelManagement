@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AccommodationsService.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +26,7 @@ namespace HotelManagement.Services
         {
             var context = new HotelManagementContext();
 
-            return context.Accommodations.Where(x=>x.AccommodationPackageID == accommodationPackageID).ToList();
+            return context.Accommodations.Where(x => x.AccommodationPackageID == accommodationPackageID).ToList();
         }
 
         public IEnumerable<Accommodation> SearchAccommodations(string searchTerm, int? accommodationPackageID, int page, int recordSize)

@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AccommodationsController.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,9 +25,9 @@ namespace HotelManagement.Controllers
 
             model.AccommodationTypes = _accommodationTypesService.GetAccommodationTypeById(accommodationTypeID);
             model.AccommodationPackages = _accommodationPackagesService.GetAllAccommodationPackagesByAccommodationType(accommodationTypeID);
-            
+
             model.SelectedAccommodationPackageID = accommodationPackageID.HasValue ? accommodationPackageID.Value : model.AccommodationPackages.First().ID;
-            
+
             model.Accommodations = _accommodationsService.GetAllAccommodationsByAccommodationPackage(model.SelectedAccommodationPackageID);
 
             return View(model);
@@ -36,7 +41,7 @@ namespace HotelManagement.Controllers
 
             return View(model);
         }
-        
+
         public ActionResult CheckAvailability(CheckAccommodationAvailabilityViewModel model)
         {
             return View();

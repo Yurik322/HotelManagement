@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="HotelManagementUserManager.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,7 +64,7 @@ namespace HotelManagement.Services
 
             //manager.EmailService = new EmailService();
             //manager.SmsService = new SmsService();
-            
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

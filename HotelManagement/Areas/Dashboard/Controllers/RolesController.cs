@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="RolesController.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +19,9 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace HotelManagement.Areas.Dashboard.Controllers
 {
+    /// <summary>
+    /// Class for RolesController
+    /// </summary>
     public class RolesController : Controller
     {
         private HotelManagementSignInManager _signInManager;
@@ -66,10 +74,9 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             RoleManager = roleManager;
         }
 
+        private readonly AccommodationsService _accommodationsService = new AccommodationsService();
+        private readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
 
-        readonly AccommodationsService _accommodationsService = new AccommodationsService();
-        readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
-        // GET: Dashboard/AccommodationTypes
         public ActionResult Index(string searchTerm, string roleID, int? page)
         {
             int recordSize = 10;
@@ -98,7 +105,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
 
             var skip = (page - 1) * recordSize;
 
-            return roles.OrderBy(x=>x.Name).Skip(skip).Take(recordSize).ToList();    
+            return roles.OrderBy(x => x.Name).Skip(skip).Take(recordSize).ToList();
         }
 
         public int SearchRolesCount(string searchTerm)

@@ -1,4 +1,9 @@
-﻿using HotelManagement.Services;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AccommodationTypesController.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using HotelManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +14,13 @@ using HotelManagement.Entities;
 
 namespace HotelManagement.Areas.Dashboard.Controllers
 {
+    /// <summary>
+    /// Class for AccommodationTypesController
+    /// </summary>
     public class AccommodationTypesController : Controller
     {
-        readonly AccommodationTypesService _accommodationTypesService = new AccommodationTypesService();
-        // GET: Dashboard/AccommodationTypes
+        private readonly AccommodationTypesService _accommodationTypesService = new AccommodationTypesService();
+
         public ActionResult Index(string searchTerm)
         {
             AccommodationTypesListingModel model = new AccommodationTypesListingModel();
@@ -72,7 +80,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
 
             if (result)
             {
-                json.Data = new {Success = true};
+                json.Data = new { Success = true };
             }
             else
             {

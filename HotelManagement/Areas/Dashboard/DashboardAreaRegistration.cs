@@ -1,4 +1,9 @@
-﻿using System.Web.Mvc;
+﻿//-----------------------------------------------------------------------
+// <copyright file="DashboardAreaRegistration.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System.Web.Mvc;
 
 namespace HotelManagement.Areas.Dashboard
 {

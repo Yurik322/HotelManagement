@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="UsersController.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,12 +18,15 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace HotelManagement.Areas.Dashboard.Controllers
 {
+    /// <summary>
+    /// Class for UsersController
+    /// </summary>
     public class UsersController : Controller
     {
         private HotelManagementSignInManager _signInManager;
         private HotelManagementUserManager _userManager;
         private HotelManagementRolesManager _roleManager;
-        
+
         public HotelManagementSignInManager SignInManager
         {
             get
@@ -101,7 +109,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             {
                 var role = await RoleManager.FindByIdAsync(roleID);
 
-                var userIDs = role.Users.Select(x=>x.UserId).ToList();
+                var userIDs = role.Users.Select(x => x.UserId).ToList();
 
                 users = users.Where(x => userIDs.Contains(x.Id));
             }
@@ -116,7 +124,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
         }
         public async Task<int> SearchUsersCount(string searchTerm, string roleID)
         {
-            
+
             var users = UserManager.Users.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchTerm))
@@ -243,7 +251,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             model.UserID = ID;
             var user = await UserManager.FindByIdAsync(ID);
             var userRoleIDs = user.Roles.Select(x => x.RoleId).ToList();
-            
+
             model.UserRoles = RoleManager.Roles.Where(x => userRoleIDs.Contains(x.Id)).ToList();
 
             model.Roles = RoleManager.Roles.Where(x => !userRoleIDs.Contains(x.Id)).ToList();
@@ -251,13 +259,6 @@ namespace HotelManagement.Areas.Dashboard.Controllers
             return PartialView("_UserRoles", model);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="opperation">Type of operation to perform e.g. Assing role or Delete role</param>
-        /// <param name="userID"></param>
-        /// <param name="roleID"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<JsonResult> UserRoleOperation(string userID, string roleID, bool isDelete = false)
         {
@@ -279,8 +280,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
                     result = await UserManager.RemoveFromRoleAsync(userID, role.Name);
                 }
 
-
-                json.Data = new {Success = result.Succeeded, Message = string.Join(",", result.Errors)};
+                json.Data = new { Success = result.Succeeded, Message = string.Join(",", result.Errors) };
             }
             else
             {

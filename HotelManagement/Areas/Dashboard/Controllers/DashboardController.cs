@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="DashboardController.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +14,9 @@ using HotelManagement.Services;
 
 namespace HotelManagement.Areas.Dashboard.Controllers
 {
+    /// <summary>
+    /// Class DashboardController for admin access
+    /// </summary>
     public class DashboardController : Controller
     {
         public ActionResult Index()

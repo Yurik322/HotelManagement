@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AccommodationsController.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,11 +15,14 @@ using HotelManagement.ViewModels;
 
 namespace HotelManagement.Areas.Dashboard.Controllers
 {
+    /// <summary>
+    /// Class for AccommodationsController
+    /// </summary>
     public class AccommodationsController : Controller
     {
-        readonly AccommodationsService _accommodationsService = new AccommodationsService();
-        readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
-        // GET: Dashboard/AccommodationTypes
+        private readonly AccommodationsService _accommodationsService = new AccommodationsService();
+        private readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
+
         public ActionResult Index(string searchTerm, int? accommodationPackageID, int? page)
         {
             int recordSize = 5;

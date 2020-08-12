@@ -1,4 +1,9 @@
-﻿using HotelManagement.Entities;
+﻿//-----------------------------------------------------------------------
+// <copyright file="HotelManagementContext.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using HotelManagement.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

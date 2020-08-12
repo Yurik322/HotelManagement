@@ -21,81 +21,80 @@
 
 <body>
 
-<div class="d-flex" id="wrapper">
+    <div class="d-flex" id="wrapper">
 
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">
-            <i class="fas fa-hotel mr-1"></i>Hotel management
-        </div>
-        <div class="list-group list-group-flush">
-            <a href="@Url.Action("Index","AccommodationTypes")" class="list-group-item list-group-item-action bg-light">
-                <i class="fas fa-building mr-1"></i>Accommodation Types
-            </a>
-            <a href="@Url.Action("Index","AccommodationPackages")" class="list-group-item list-group-item-action bg-light">
-                <i class="fas fa-cubes mr-1"></i>Accommodation Package
-            </a>
-            <a href="@Url.Action("Index","Accommodations")" class="list-group-item list-group-item-action bg-light">
-                <i class="fas fa-key mr-1"></i>Accommodations
-            </a>
-            <a href="@Url.Action("Index","Roles")" class="list-group-item list-group-item-action bg-light">
-                <i class="fas fa-user-cog mr-1"></i>Roles
-            </a>
-            <a href="@Url.Action("Index","Users")" class="list-group-item list-group-item-action bg-light">
-                <i class="fas fa-users mr-1"></i>Users
-            </a>
-        </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <button class="btn btn-primary" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">
-                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
-                        </a>
-                    </li>
-                </ul>
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <i class="fas fa-hotel mr-1"></i>Hotel management
             </div>
-        </nav>
-
-        <div class="container-fluid">
-            @RenderBody()
+            <div class="list-group list-group-flush">
+                <a href="@Url.Action("Index","AccommodationTypes")" class="list-group-item list-group-item-action bg-light">
+                    <i class="fas fa-building mr-1"></i>Accommodation Types
+                </a>
+                <a href="@Url.Action("Index","AccommodationPackages")" class="list-group-item list-group-item-action bg-light">
+                    <i class="fas fa-cubes mr-1"></i>Accommodation Package
+                </a>
+                <a href="@Url.Action("Index","Accommodations")" class="list-group-item list-group-item-action bg-light">
+                    <i class="fas fa-key mr-1"></i>Accommodations
+                </a>
+                <a href="@Url.Action("Index","Roles")" class="list-group-item list-group-item-action bg-light">
+                    <i class="fas fa-user-cog mr-1"></i>Roles
+                </a>
+                <a href="@Url.Action("Index","Users")" class="list-group-item list-group-item-action bg-light">
+                    <i class="fas fa-users mr-1"></i>Users
+                </a>
+            </div>
         </div>
-    </div>
-    <!-- /#page-content-wrapper -->
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
 
-</div>
-    
-@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">
+                                <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+
+    @using Microsoft.AspNet.Identity
+    @if (Request.IsAuthenticated)
     {
-        @Html.AntiForgeryToken()
+        using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+        }
     }
-}
-<!-- /#wrapper -->
+    <!-- /#wrapper -->
     <script src="~/Areas/Dashboard/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
     </script>
 
 </body>

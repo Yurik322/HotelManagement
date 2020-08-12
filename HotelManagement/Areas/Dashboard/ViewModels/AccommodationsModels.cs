@@ -1,4 +1,9 @@
-﻿using HotelManagement.Entities;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AccommodationModels.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using HotelManagement.Entities;
 using HotelManagement.ViewModels;
 using System;
 using System.Collections.Generic;

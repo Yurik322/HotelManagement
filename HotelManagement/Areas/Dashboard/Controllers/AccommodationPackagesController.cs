@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AccommodationPackagesController.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,11 +15,14 @@ using HotelManagement.ViewModels;
 
 namespace HotelManagement.Areas.Dashboard.Controllers
 {
+    /// <summary>
+    /// Class for AccommodationPackagesController
+    /// </summary>
     public class AccommodationPackagesController : Controller
     {
-        readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
-        readonly AccommodationTypesService _accommodationTypesService = new AccommodationTypesService();
-        readonly DashboardService _dashboardService = new DashboardService();
+        private readonly AccommodationPackagesService _accommodationPackagesService = new AccommodationPackagesService();
+        private readonly AccommodationTypesService _accommodationTypesService = new AccommodationTypesService();
+        private readonly DashboardService _dashboardService = new DashboardService();
 
         public ActionResult Index(string searchTerm, int? accommodationTypeID, int? page)
         {
@@ -98,7 +106,7 @@ namespace HotelManagement.Areas.Dashboard.Controllers
                 accommodationPackage.FeePerNight = model.FeePerNight;
 
                 accommodationPackage.AccommodationPackagePictures = new List<AccommodationPackagePicture>();
-                accommodationPackage.AccommodationPackagePictures.AddRange(pictures.Select(x=>new AccommodationPackagePicture() { PictureID = x.ID }));
+                accommodationPackage.AccommodationPackagePictures.AddRange(pictures.Select(x => new AccommodationPackagePicture() { PictureID = x.ID }));
 
                 result = _accommodationPackagesService.SaveAccommodationPackage(accommodationPackage);
             }

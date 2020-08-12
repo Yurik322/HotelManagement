@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="ManageController.cs" company="My">
+//    Created by yurik_322 on 20/08/12.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -33,9 +38,9 @@ namespace HotelManagement.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<HotelManagementSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -334,7 +339,7 @@ namespace HotelManagement.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -385,6 +390,6 @@ namespace HotelManagement.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
